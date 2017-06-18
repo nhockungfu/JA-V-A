@@ -37,7 +37,7 @@ public class StatusPanel extends JPanel {
         
     }
     public void start_Again() {
-        statusLabel.setText("  Game Started ");
+        statusLabel.setText("  Game Started 09 ");
     }
     
     public void changeStatus(Object str) {

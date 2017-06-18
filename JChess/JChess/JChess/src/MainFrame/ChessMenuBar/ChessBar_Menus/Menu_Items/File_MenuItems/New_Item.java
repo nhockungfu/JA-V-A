@@ -33,15 +33,7 @@ public class New_Item extends JMenu
             public void actionPerformed(ActionEvent e)
             {
                 
-                Ndial.setVisible(true);
-                
-                
-                
-                
-                
-                
-                
-                
+                Ndial.setVisible(true);             
             }
         } );
         add(OnePlayer);

@@ -21,16 +21,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.event.*;
-import java.lang.String;
-import javax.swing.JScrollPane;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
-import javax.net.*;
+
 
 
 public class MainPanel extends JPanel {
@@ -69,11 +64,7 @@ public class MainPanel extends JPanel {
         
         MyIp_Address=Ip;
         MyPort_number=Port;
-        
-        
-        
-        
-        
+     
         start_Again();
         startServer=new JButton(" Start server");
         startServer.setSize(150,25);
@@ -244,7 +235,7 @@ public class MainPanel extends JPanel {
         for (int i=0; i<8; i=i+2) {
             for (int j=0; j<8; j=j+2) {
                 
-                g2.setColor(Color.BLUE);
+                g2.setColor( new Color(92, 63, 25));
                 rec=new Rectangle2D.Double(j*iWidth/8,(1+i)*iWidth/8,Divide,Divide);
                 g2.fill(rec);
                 rec=new Rectangle2D.Double((1+j)*iWidth/8,i*iWidth/8,Divide,Divide);

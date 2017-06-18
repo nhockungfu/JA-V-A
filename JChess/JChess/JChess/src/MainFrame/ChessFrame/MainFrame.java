@@ -48,18 +48,8 @@ public class MainFrame extends JFrame {
         
     }
     public void start_Again() {
-        Mainpanel.start_Again();
-        
-        
-        
-        
-        contentPane.add(Mainpanel);
-        
-        
-        
-        
-        
-        
+        Mainpanel.start_Again();      
+        contentPane.add(Mainpanel); 
     }
     
     public void start_As_Server() {
@@ -89,9 +79,5 @@ public class MainFrame extends JFrame {
     
 }
 
-/*
- *   *       Please Visit us at www.codemiles.com     *
- *  This Program was Developed by www.codemiles.com forums Team
- *  *           Please Don't Remove This Comment       *
- */
+
 
