@@ -10,10 +10,10 @@ public class Move {
 	public Piece capturedPiece;
 	
 	public Move(int sourceRow, int sourceColumn, int targetRow, int targetColumn) {
-		this.sourceRow = sourceRow;
-		this.sourceColumn = sourceColumn;
-		this.targetRow = targetRow;
-		this.targetColumn = targetColumn;
+            this.sourceRow = sourceRow;
+            this.sourceColumn = sourceColumn;
+            this.targetRow = targetRow;
+            this.targetColumn = targetColumn;
 	}
 	
 	@Override

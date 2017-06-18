@@ -58,7 +58,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
     public PlayWithComputer(ChessGame chessGame) {
         initComponents();
 
-        URL urlBackgroundImg = getClass().getResource("/imgs/bo2.png");
+        URL urlBackgroundImg = getClass().getResource("/imgs/bo_2.png");
         this.imgBackground = new ImageIcon(urlBackgroundImg).getImage();
 
         this.chessGame = chessGame;
@@ -185,11 +185,13 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
    public int getGameState() {
         return this.chessGame.getGameState();
    }
-
+   
+   //X = vị trí X bắt đầu bàn cờ + độ rộng ô cờ * số cột
    public static int convertColumnToX(int column){
         return PIECES_START_X + SQUARE_WIDTH * column;
    }
-
+   
+   //Y = vị trí Y bắt đầu bàn cờ + độ rộng ô cờ * số dòng
    public static int convertRowToY(int row){
         return PIECES_START_Y + SQUARE_HEIGHT * (Piece.ROW_8 - row);
    }

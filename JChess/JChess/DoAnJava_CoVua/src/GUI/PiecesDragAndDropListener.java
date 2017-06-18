@@ -8,7 +8,7 @@ import logic.*;
 public class PiecesDragAndDropListener implements MouseListener, MouseMotionListener {
 
     private List<GuiPiece> guiPieces;
-    private PlayWithComputer chessGui;
+    private PlayWithComputer playWithComputer;
 
     private int dragOffsetX;
     private int dragOffsetY;
@@ -16,12 +16,12 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
 
     public PiecesDragAndDropListener(List<GuiPiece> guiPieces, PlayWithComputer chessGui) {
             this.guiPieces = guiPieces;
-            this.chessGui = chessGui;
+            this.playWithComputer = chessGui;
     }
 
     @Override
     public void mousePressed(MouseEvent evt) {
-        if( !this.chessGui.isDraggingGamePiecesEnabled()){
+        if( !this.playWithComputer.isDraggingGamePiecesEnabled()){
                 return;
         }
         int x = evt.getPoint().x;
@@ -30,12 +30,12 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
         for (int i = this.guiPieces.size()-1; i >= 0; i--) {
             GuiPiece guiPiece = this.guiPieces.get(i);
             if(mouseOverPiece(guiPiece,x,y)){
-                if( (this.chessGui.getGameState() == ChessGame.GAME_STATE_WHITE&& guiPiece.getColor() == Piece.COLOR_WHITE) ||
-                    (this.chessGui.getGameState() == ChessGame.GAME_STATE_BLACK&& guiPiece.getColor() == Piece.COLOR_BLACK)){
+                if( (this.playWithComputer.getGameState() == ChessGame.GAME_STATE_WHITE&& guiPiece.getColor() == Piece.COLOR_WHITE) ||
+                    (this.playWithComputer.getGameState() == ChessGame.GAME_STATE_BLACK&& guiPiece.getColor() == Piece.COLOR_BLACK)){
                     this.dragOffsetX = x - guiPiece.getX();
                     this.dragOffsetY = y - guiPiece.getY();
-                    this.chessGui.setDragPiece(guiPiece);
-                    this.chessGui.repaint();
+                    this.playWithComputer.setDragPiece(guiPiece);
+                    this.playWithComputer.repaint();
                     break;
                 }
             }
@@ -53,31 +53,31 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
 
     @Override
     public void mouseReleased(MouseEvent evt) {
-        if( this.chessGui.getDragPiece() != null){
+        if( this.playWithComputer.getDragPiece() != null){
             int x = evt.getPoint().x - this.dragOffsetX;
             int y = evt.getPoint().y - this.dragOffsetY;
 
             // set game piece to the new location if possible
             //
-            chessGui.setNewPieceLocation(this.chessGui.getDragPiece(), x, y);
-            this.chessGui.repaint();
-            this.chessGui.setDragPiece(null);
+            playWithComputer.setNewPieceLocation(this.playWithComputer.getDragPiece(), x, y);
+            this.playWithComputer.repaint();
+            this.playWithComputer.setDragPiece(null);
         }
     }
 
     //khi keo chuot
     @Override
     public void mouseDragged(MouseEvent evt) {
-        if(this.chessGui.getDragPiece() != null){
+        if(this.playWithComputer.getDragPiece() != null){
             int x = evt.getPoint().x - this.dragOffsetX;
             int y = evt.getPoint().y - this.dragOffsetY;
 
             //tien hanh set lai x,y cho hinh anh
-            GuiPiece dragPiece = this.chessGui.getDragPiece();
+            GuiPiece dragPiece = this.playWithComputer.getDragPiece();
             dragPiece.setX(x);
             dragPiece.setY(y);
 
-            this.chessGui.repaint();
+            this.playWithComputer.repaint();
         }	
     }
 
