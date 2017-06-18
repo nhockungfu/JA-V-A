@@ -22,7 +22,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="467" max="32767" attributes="0"/>
+              <EmptySpace pref="774" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="btn_trove" alignment="1" max="32767" attributes="0"/>
                   <Component id="btn_dilai" alignment="1" max="32767" attributes="0"/>
@@ -35,7 +35,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="337" max="32767" attributes="0"/>
+              <EmptySpace pref="509" max="32767" attributes="0"/>
               <Component id="btn_vanmoi" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btn_dilai" min="-2" pref="30" max="-2" attributes="0"/>

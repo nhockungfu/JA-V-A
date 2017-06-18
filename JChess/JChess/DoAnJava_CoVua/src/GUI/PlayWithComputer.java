@@ -27,14 +27,14 @@ import logic.Piece;
  */
 public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandler{
 
-    private static final int BOARD_START_X = 17; //X bắt đầu bàn cờ
-    private static final int BOARD_START_Y = 13; //Y bắt đầu bàn cờ
+    private static final int BOARD_START_X = 60; //X bắt đầu bàn cờ
+    private static final int BOARD_START_Y = 45; //Y bắt đầu bàn cờ
 
-    private static final int SQUARE_WIDTH = 50; // độ rộng mỗi ô cờ
-    private static final int SQUARE_HEIGHT = 50;// độ cao mỗi ô cờ
+    private static final int SQUARE_WIDTH = 69; // độ rộng mỗi ô cờ
+    private static final int SQUARE_HEIGHT = 69;// độ cao mỗi ô cờ
 
-    private static final int PIECE_WIDTH = 48; //độ rộng mỗi quân cờ
-    private static final int PIECE_HEIGHT = 48; // độ cao mỗi quân cờ
+    private static final int PIECE_WIDTH = 69; //độ rộng mỗi quân cờ
+    private static final int PIECE_HEIGHT = 69; // độ cao mỗi quân cờ
 
     //X bắt đầu để quân cờ vào ô cờ
     private static final int PIECES_START_X = BOARD_START_X + (int)(SQUARE_WIDTH - PIECE_WIDTH);
@@ -58,7 +58,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
     public PlayWithComputer(ChessGame chessGame) {
         initComponents();
 
-        URL urlBackgroundImg = getClass().getResource("/imgs/bo_2.png");
+        URL urlBackgroundImg = getClass().getResource("/imgs/ChessBoard02.png");
         this.imgBackground = new ImageIcon(urlBackgroundImg).getImage();
 
         this.chessGame = chessGame;
@@ -77,8 +77,8 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         f.add(this);
         f.setTitle("With Computer");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(574, 460);
-        f.setResizable(false);
+        f.setSize(800, 660);
+        
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }
@@ -126,7 +126,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
                         filename += "r";
                         break;
         }
-        filename += ".png";
+        filename += ".gif";
 
         URL urlPieceImg = getClass().getResource("/imgs/" + filename);
         return new ImageIcon(urlPieceImg).getImage();
@@ -161,8 +161,11 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
                         int highlightY = convertRowToY(row);
 
                         // draw the highlight
-                        g.setColor(Color.GREEN);
-                        g.drawRoundRect( highlightX+2, highlightY+4, SQUARE_WIDTH-8, SQUARE_HEIGHT-8,10,10);         
+                        g.setColor(new Color(102, 255, 51, 60));
+                       // g.setColor(Color.GREEN);
+                        g.drawRoundRect( highlightX-14, highlightY+4, SQUARE_WIDTH, SQUARE_HEIGHT,10,10); 
+                        g.fillRect(highlightX-14, highlightY+4, SQUARE_WIDTH - 1, SQUARE_HEIGHT - 1);
+                        
                     }
                 }
             }
@@ -262,7 +265,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(467, Short.MAX_VALUE)
+                .addContainerGap(774, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_trove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_dilai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -272,7 +275,7 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(337, Short.MAX_VALUE)
+                .addContainerGap(509, Short.MAX_VALUE)
                 .addComponent(btn_vanmoi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_dilai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)

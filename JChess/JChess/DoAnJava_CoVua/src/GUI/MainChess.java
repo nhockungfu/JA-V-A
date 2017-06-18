@@ -99,7 +99,7 @@ public class MainChess extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
         ChessGame chessGame = new ChessGame();
-        // then we create the clients/players
+        // then we create the clients/playersPlayW
         PlayWithComputer chessGui = new PlayWithComputer(chessGame);
         //ChessConsole chessConsole = new ChessConsole(chessGame);
         SimpleAiPlayerHandler ai1 = new SimpleAiPlayerHandler(chessGame);
