@@ -77,22 +77,22 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         f.add(this);
         f.setTitle("With Computer");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(800, 660);
-        
+        f.setSize(800, 700);
+        f.setResizable(false);
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }
 
-    private String getGameStateAsText() {
-        String state = "unknown";
-        switch (this.chessGame.getGameState()) {
-            case ChessGame.GAME_STATE_BLACK: state = "black";break;
-            case ChessGame.GAME_STATE_END_WHITE_WON: state = "white won";break;
-            case ChessGame.GAME_STATE_END_BLACK_WON: state = "black won";break;
-            case ChessGame.GAME_STATE_WHITE: state = "white";break;
-        }
-        return state;
-    }
+//    private String getGameStateAsText() {
+//        String state = "unknown";
+//        switch (this.chessGame.getGameState()) {
+//            case ChessGame.GAME_STATE_BLACK: state = "black";break;
+//            case ChessGame.GAME_STATE_END_WHITE_WON: state = "white won";break;
+//            case ChessGame.GAME_STATE_END_BLACK_WON: state = "black won";break;
+//            case ChessGame.GAME_STATE_WHITE: state = "white";break;
+//        }
+//        return state;
+//    }
 
     private void createAndAddGuiPiece(Piece piece) {
         Image img = this.getImageForPiece(piece.getColor(), piece.getType());
@@ -172,10 +172,10 @@ public class PlayWithComputer extends javax.swing.JPanel implements IPlayerHandl
         }
         // draw game state label
         
-        String str= this.getGameStateAsText();
-        if(str=="black won"){
-           
-        }
+//        String str= this.getGameStateAsText();
+//        if(str=="black won"){
+//           
+//        }
     }
     /**
     * check if the user is currently dragging a game piece

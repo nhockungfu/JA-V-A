@@ -9,6 +9,8 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
 
     private List<GuiPiece> guiPieces;
     private PlayWithComputer playWithComputer;
+    private PlayWithPersonServer playWithPersonServer;
+    private PlayWithPersonClient playWithPersonClient;
 
     private int dragOffsetX;
     private int dragOffsetY;
@@ -18,28 +20,86 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
             this.guiPieces = guiPieces;
             this.playWithComputer = chessGui;
     }
+    
+    public PiecesDragAndDropListener(List<GuiPiece> guiPieces,  PlayWithPersonServer chessGui) {
+            this.guiPieces = guiPieces;
+            this.playWithPersonServer = chessGui;
+    }
+    public PiecesDragAndDropListener(List<GuiPiece> guiPieces, PlayWithPersonClient chessGui) {
+            this.guiPieces = guiPieces;
+            this.playWithPersonClient = chessGui;
+    }
 
     @Override
     public void mousePressed(MouseEvent evt) {
-        if( !this.playWithComputer.isDraggingGamePiecesEnabled()){
+        
+        try
+        { 
+            int x = evt.getPoint().x;
+            int y = evt.getPoint().y;
+            if( !playWithComputer.isDraggingGamePiecesEnabled()){
                 return;
-        }
-        int x = evt.getPoint().x;
-        int y = evt.getPoint().y;
-
-        for (int i = this.guiPieces.size()-1; i >= 0; i--) {
-            GuiPiece guiPiece = this.guiPieces.get(i);
-            if(mouseOverPiece(guiPiece,x,y)){
-                if( (this.playWithComputer.getGameState() == ChessGame.GAME_STATE_WHITE&& guiPiece.getColor() == Piece.COLOR_WHITE) ||
-                    (this.playWithComputer.getGameState() == ChessGame.GAME_STATE_BLACK&& guiPiece.getColor() == Piece.COLOR_BLACK)){
-                    this.dragOffsetX = x - guiPiece.getX();
-                    this.dragOffsetY = y - guiPiece.getY();
-                    this.playWithComputer.setDragPiece(guiPiece);
-                    this.playWithComputer.repaint();
-                    break;
+            }
+            for (int i = this.guiPieces.size()-1; i >= 0; i--) {
+                GuiPiece guiPiece = this.guiPieces.get(i);
+                if(mouseOverPiece(guiPiece,x,y)){
+                    if( (this.playWithComputer.getGameState() == ChessGame.GAME_STATE_WHITE&& guiPiece.getColor() == Piece.COLOR_WHITE) ||
+                        (this.playWithComputer.getGameState() == ChessGame.GAME_STATE_BLACK&& guiPiece.getColor() == Piece.COLOR_BLACK)){
+                        this.dragOffsetX = x - guiPiece.getX();
+                        this.dragOffsetY = y - guiPiece.getY();
+                        this.playWithComputer.setDragPiece(guiPiece);
+                        this.playWithComputer.repaint();
+                        break;
+                    }
                 }
             }
+           
         }
+        catch(Exception e){ }
+        try
+        { 
+            int x = evt.getPoint().x;
+            int y = evt.getPoint().y;
+            if( !this.playWithPersonClient.isDraggingGamePiecesEnabled()){
+               return;
+                }
+             for (int i = this.guiPieces.size()-1; i >= 0; i--) {
+                 GuiPiece guiPiece = this.guiPieces.get(i);
+                 if(mouseOverPiece(guiPiece,x,y)){
+                     if( (this.playWithPersonClient.getGameState() == ChessGame.GAME_STATE_WHITE&& guiPiece.getColor() == Piece.COLOR_WHITE) ||
+                         (this.playWithPersonClient.getGameState() == ChessGame.GAME_STATE_BLACK&& guiPiece.getColor() == Piece.COLOR_BLACK)){
+                         this.dragOffsetX = x - guiPiece.getX();
+                         this.dragOffsetY = y - guiPiece.getY();
+                         this.playWithPersonClient.setDragPiece(guiPiece);
+                         this.playWithPersonClient.repaint();
+                         break;
+                     }
+                 }
+            }  
+        }
+        catch(Exception e){} 
+         try
+        { 
+            int x = evt.getPoint().x;
+            int y = evt.getPoint().y;
+            if( !this.playWithPersonServer.isDraggingGamePiecesEnabled()){
+               return;
+            }
+            for (int i = this.guiPieces.size()-1; i >= 0; i--) {
+                GuiPiece guiPiece = this.guiPieces.get(i);
+                if(mouseOverPiece(guiPiece,x,y)){
+                    if( (this.playWithPersonServer.getGameState() == ChessGame.GAME_STATE_WHITE&& guiPiece.getColor() == Piece.COLOR_WHITE) ||
+                       (this.playWithPersonServer.getGameState() == ChessGame.GAME_STATE_BLACK&& guiPiece.getColor() == Piece.COLOR_BLACK)){
+                        this.dragOffsetX = x - guiPiece.getX();
+                        this.dragOffsetY = y - guiPiece.getY();
+                        this.playWithPersonServer.setDragPiece(guiPiece);
+                        this.playWithPersonServer.repaint();
+                        break;
+                     }
+                 }
+            }  
+        }
+        catch(Exception e){}   
     }
 
     //Kieem tra co phai dang nhan vo hinh nay hay k
@@ -53,32 +113,106 @@ public class PiecesDragAndDropListener implements MouseListener, MouseMotionList
 
     @Override
     public void mouseReleased(MouseEvent evt) {
-        if( this.playWithComputer.getDragPiece() != null){
-            int x = evt.getPoint().x - this.dragOffsetX;
-            int y = evt.getPoint().y - this.dragOffsetY;
+        int x = evt.getPoint().x - this.dragOffsetX;
+        int y = evt.getPoint().y - this.dragOffsetY;
+        try
+        {
+             if( this.playWithComputer.getDragPiece() != null){
+                
 
-            // set game piece to the new location if possible
-            //
-            playWithComputer.setNewPieceLocation(this.playWithComputer.getDragPiece(), x, y);
-            this.playWithComputer.repaint();
-            this.playWithComputer.setDragPiece(null);
+                // set game piece to the new location if possible
+                //
+                playWithComputer.setNewPieceLocation(this.playWithComputer.getDragPiece(), x, y);
+                this.playWithComputer.repaint();
+                this.playWithComputer.setDragPiece(null);
+            }
         }
+        catch(Exception e)
+        {
+            
+        }
+       try
+        {
+             if( this.playWithPersonClient.getDragPiece() != null){
+  
+
+                // set game piece to the new location if possible
+                //
+                playWithPersonClient.setNewPieceLocation(this.playWithPersonClient.getDragPiece(), x, y);
+                this.playWithPersonClient.repaint();
+                this.playWithPersonClient.setDragPiece(null);
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+       try
+        {
+             if( this.playWithPersonServer.getDragPiece() != null){
+  
+
+                // set game piece to the new location if possible
+                //
+                playWithPersonServer.setNewPieceLocation(this.playWithPersonServer.getDragPiece(), x, y);
+                this.playWithPersonServer.repaint();
+                this.playWithPersonServer.setDragPiece(null);
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+        
     }
 
     //khi keo chuot
     @Override
     public void mouseDragged(MouseEvent evt) {
-        if(this.playWithComputer.getDragPiece() != null){
-            int x = evt.getPoint().x - this.dragOffsetX;
-            int y = evt.getPoint().y - this.dragOffsetY;
+        int x = evt.getPoint().x - this.dragOffsetX;
+        int y = evt.getPoint().y - this.dragOffsetY;
+        try
+        {
+            if(this.playWithComputer.getDragPiece() != null){
+            
 
-            //tien hanh set lai x,y cho hinh anh
-            GuiPiece dragPiece = this.playWithComputer.getDragPiece();
-            dragPiece.setX(x);
-            dragPiece.setY(y);
+                //tien hanh set lai x,y cho hinh anh
+                GuiPiece dragPiece = this.playWithComputer.getDragPiece();
+                dragPiece.setX(x);
+                dragPiece.setY(y);
 
-            this.playWithComputer.repaint();
-        }	
+                this.playWithComputer.repaint();
+            }	
+        }
+        catch(Exception e) { }
+       
+        try
+        {
+            if(this.playWithPersonClient.getDragPiece() != null){
+
+                //tien hanh set lai x,y cho hinh anh
+                GuiPiece dragPiece = this.playWithPersonClient.getDragPiece();
+                dragPiece.setX(x);
+                dragPiece.setY(y);
+
+                this.playWithPersonClient.repaint();
+            }	
+        }
+        catch(Exception e) { }
+         try
+        {
+            if(this.playWithPersonServer.getDragPiece() != null){
+
+                //tien hanh set lai x,y cho hinh anh
+                GuiPiece dragPiece = this.playWithPersonServer.getDragPiece();
+                dragPiece.setX(x);
+                dragPiece.setY(y);
+
+                this.playWithPersonServer.repaint();
+            }	
+        }
+        catch(Exception e) { }
+        
     }
 
     @Override

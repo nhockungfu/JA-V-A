@@ -6,6 +6,9 @@
 
 package GUI;
 
+import logic.ChessGame;
+import logic.Piece;
+
 /**
  *
  * @author PhucRed
@@ -36,12 +39,14 @@ public class dialogKetNoi extends javax.swing.JDialog {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtIPAddress = new javax.swing.JTextField();
+        txtPort = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         btn_batdau = new javax.swing.JButton();
         btn_huy = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtUser = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,9 +58,9 @@ public class dialogKetNoi extends javax.swing.JDialog {
 
         jLabel3.setText("Port");
 
-        jTextField1.setText("127.0.0.1");
+        txtIPAddress.setText("192.168.56.1");
 
-        jTextField2.setText("5000");
+        txtPort.setText("2000");
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setSelected(true);
@@ -65,6 +70,11 @@ public class dialogKetNoi extends javax.swing.JDialog {
         jRadioButton2.setText("Client");
 
         btn_batdau.setText("Bắt đầu");
+        btn_batdau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batdauActionPerformed(evt);
+            }
+        });
 
         btn_huy.setText("Hủy");
         btn_huy.addActionListener(new java.awt.event.ActionListener() {
@@ -73,33 +83,41 @@ public class dialogKetNoi extends javax.swing.JDialog {
             }
         });
 
+        jLabel4.setText("Tên người dùng:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btn_batdau)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_huy))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jRadioButton1)
-                            .addGap(51, 51, 51)
-                            .addComponent(jRadioButton2))))
-                .addGap(107, 107, 107))
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btn_batdau)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_huy))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(169, 169, 169))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addGap(45, 45, 45)
+                        .addComponent(jRadioButton2)
+                        .addGap(177, 177, 177))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,20 +129,24 @@ public class dialogKetNoi extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(31, 31, 31)
+                    .addComponent(jLabel4)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_batdau)
-                    .addComponent(btn_huy))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(btn_huy)
+                    .addComponent(btn_batdau))
+                .addGap(55, 55, 55))
         );
 
         pack();
@@ -135,6 +157,43 @@ public class dialogKetNoi extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btn_huyActionPerformed
+
+    private void btn_batdauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batdauActionPerformed
+        dispose();
+        ChessGame chessGame = new ChessGame();
+        if(jRadioButton1.isSelected() == true)
+        {
+             
+            PlayWithPersonServer.ipAddressServer = txtIPAddress.getText();
+            PlayWithPersonServer.portServer = txtPort.getText();
+            PlayWithPersonServer.userServer = txtUser.getText();
+            PlayWithPersonServer chessGui = new PlayWithPersonServer(chessGame);
+            chessGame.setPlayer(Piece.COLOR_BLACK, chessGui);
+            chessGame.setPlayer(Piece.COLOR_WHITE, chessGui);
+            new Thread(chessGame).start();
+            
+        }
+        else
+        {
+            if(jRadioButton2.isSelected() == true)
+            {
+                PlayWithPersonClient.ipAddressClient = txtIPAddress.getText();
+                PlayWithPersonClient.portClient = txtPort.getText();
+                PlayWithPersonClient.userClient = txtUser.getText();
+                PlayWithPersonClient chessGui = new PlayWithPersonClient(chessGame);
+                
+                chessGame.setPlayer(Piece.COLOR_BLACK, chessGui);
+                //chessGame.setPlayer(Piece.COLOR_BLACK, ai1);
+                chessGame.setPlayer(Piece.COLOR_WHITE, chessGui);
+                // in the end we start the game
+                new Thread(chessGame).start();
+
+            }
+        }
+        
+            // then we create the clients/playersPlayW
+       
+    }//GEN-LAST:event_btn_batdauActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,7 +206,7 @@ public class dialogKetNoi extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Classic".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -187,10 +246,12 @@ public class dialogKetNoi extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtIPAddress;
+    private javax.swing.JTextField txtPort;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
 }
